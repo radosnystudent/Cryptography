@@ -7,12 +7,11 @@ def extendedGCD(a: int, b: int) -> tuple:
 
 def modInvert(a: int, b: int) -> str:
     g, x, y = extendedGCD(a, b)
-
+    print(f'{g} {x} {y}')
     if g == 1:
         return f'inverse: {x % b}'
     else:
         return 'modular inverse not exist'
-
 
 if __name__ == "__main__":
     a: int = int(input("enter first number - a:\n> "))
