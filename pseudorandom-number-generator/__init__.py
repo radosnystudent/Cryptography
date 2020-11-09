@@ -10,12 +10,12 @@ n = int(input("Podaj n:\n> "))
 SEED_SIZE: int = len(inputValue)
 
 
-def function_L(x: int) -> int:
+def L_function(x: int) -> int:
     # any polynomial function
     return 3 * x ** 2 - 5 * x + 9
 
 
-def function_F(x: str):
+def F_function(x: str):
     # f(x) <- 2^x mod p
     return bin(pow(GENERATOR, int(x, 2), MODULUS)).replace('0b', '').zfill(SEED_SIZE)
 
@@ -30,7 +30,7 @@ def HFunction(first_half: str, second_half: str) -> str:
     #       b <- b XOR (x[i] AND y[i])
     #   return f + y + b
 
-    fx: str = function_F(first_half)
+    fx: str = F_function(first_half)
     hard_core_bit: int = 0
     for i in range(len(first_half)):
         hard_core_bit = (hard_core_bit ^ (int(first_half[i]) & int(second_half[i]))) % 2
@@ -42,14 +42,15 @@ def PRNG(initial_seed: str, n: int) -> str:
     # pseudorandom number generator
     # function G(x0)
     #   t <- aftual time in miliseconds convert to binary number
-    #   output <- '1' (because we want 1 on first bit)
+    #   output <- '1' (because we want 1 on first bit and thats because we don't want k-bit numbers to be like: k=5, k-bit number = 00000 )
     #   for i <- 0 to |x0|- 1 do
     #       t <- H(first_half(t), second_half(t))
     #       output <- output * last_bit(t)
     #       t <- remove_last_bit(t)
     #   return output
 
-    # result: str = '1'
+    # because we need k-bit numbers form range [0, n-1], we need to check if generated number is in given range
+    # if not, generate another
     while True:
         result: str = '1'
         binary_string: str = "{0:b}".format(int(dt.datetime.now().timestamp() * 10000))
@@ -66,14 +67,18 @@ def PRNG(initial_seed: str, n: int) -> str:
             break
     return result
 
-minValue: str = '1' + '0' * (SEED_SIZE - 1)
-maxValue: str = "{0:b}".format(n)
+# range [min, max] <- all k-bit numbers
+minValue: int = int('1' + '0' * (SEED_SIZE - 1), 2)
+maxValue: int = int("{0:b}".format(n), 2)
 
 if __name__ == '__main__':
-    print(f'początkowa liczba: {int(inputValue, 2)}; liczba bitów: {SEED_SIZE}')
-    print(f'Przedział liczb: [{int(minValue,2)}, {int(maxValue,2)})')
-    results: list = list()
-    for _ in range(N):
-        results.append(int(PRNG(inputValue, n), 2))
-        MODULUS = abs(MODULUS - function_L(SEED_SIZE))
-    print(f'results: {results}')
+    if n > minValue:
+        print(f'początkowa liczba: {int(inputValue, 2)}; liczba bitów: {SEED_SIZE}')
+        print(f'Przedział liczb: [{minValue}, {maxValue})')
+        results: list = list()
+        for _ in range(N):
+            results.append(int(PRNG(inputValue, n), 2))
+            MODULUS = abs(MODULUS - L_function(SEED_SIZE))
+        print(f'results: {results}')
+    else:
+        print(f'nie ma {SEED_SIZE}-bitowych liczb, które byłyby w przedziale [0, {n - 1}]')
