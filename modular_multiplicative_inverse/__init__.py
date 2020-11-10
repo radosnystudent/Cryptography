@@ -20,7 +20,7 @@ def modInvert(a: int, b: int) -> str:
     else:
         return 'modular inverse not exist'
 
-if __name__ == "__main__":
-    a: int = int(input("enter first number - a:\n> "))
-    b: int = int(input("enter second number b:\n> "))
-    print(modInvert(a, b))
+# if __name__ == "__main__":
+#     a: int = int(input("enter first number - a:\n> "))
+#     b: int = int(input("enter second number b:\n> "))
+#     print(modInvert(a, b))

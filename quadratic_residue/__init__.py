@@ -5,7 +5,7 @@ Dane: a ∈ Z∗p
 Wynik: True jeśli a jest resztą kwadratową, False w przeciwnym wypadku.
 """
 
-from cryptography.modular_exponentiation import powMod
+from modular_exponentiation import powMod
 
 def quadraticResidue(a, p):
     if p < 2:
@@ -13,7 +13,7 @@ def quadraticResidue(a, p):
     else:
         return powMod(a, (p - 1) / 2, p) == 1
 
-if __name__ == "__main__":
-    a: int = int(input("a:\n> "))
-    p: int = int(input("p (must be 2 or higher):\n> "))
-    print(f'{quadraticResidue(a, p)}')
+# if __name__ == "__main__":
+#     a: int = int(input("a:\n> "))
+#     p: int = int(input("p (must be 2 or higher):\n> "))
+#     print(f'{quadraticResidue(a, p)}')

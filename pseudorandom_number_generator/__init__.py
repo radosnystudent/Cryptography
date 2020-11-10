@@ -6,25 +6,16 @@ Wynik: k-bitowa liczba b ∈ Zn
 
 import datetime as dt
 
-# dowolne stałe
 GENERATOR: int = 2057
 MODULUS: int = 3167
-
-inputValue = "{0:b}".format(int(input("Twoja liczba:\n> ")))
-N = int(input("Ile liczb chcesz wygenerować?\n> "))
-n = int(input("Podaj n:\n> "))
-SEED_SIZE: int = len(inputValue)
-
 
 def L_function(x: int) -> int:
     # any polynomial function
     return 3 * x ** 2 - 5 * x + 9
 
-
 def F_function(x: str):
     # f(x) <- g^x mod p
     return "{0:b}".format(pow(GENERATOR, int(x, 2), MODULUS))
-
 
 def HFunction(first_half: str, second_half: str) -> str:
 
@@ -42,8 +33,9 @@ def HFunction(first_half: str, second_half: str) -> str:
         hard_core_bit = (hard_core_bit ^ (int(first_half[i]) & int(second_half[i]))) % 2
     return fx + second_half + str(hard_core_bit)
 
-
 def PRNG(initial_seed: str, n: int) -> str:
+
+    SEED_SIZE: int = len(initial_seed)
 
     # pseudorandom number generator
     # function G(x0)
@@ -73,11 +65,19 @@ def PRNG(initial_seed: str, n: int) -> str:
             break
     return result
 
-# range [min, max] <- all k-bit numbers
-minValue: int = int('1' + '0' * (SEED_SIZE - 1), 2)
-maxValue: int = int("{0:b}".format(n), 2)
+def main():
+    global MODULUS
+    inputValue = "{0:b}".format(int(input("Twoja liczba:\n> ")))
 
-if __name__ == '__main__':
+    N = int(input("Ile liczb chcesz wygenerować?\n> "))
+    n = int(input("Podaj n:\n> "))
+
+    SEED_SIZE: int = len(inputValue)
+
+    # range [min, max] <- all k-bit numbers
+    minValue: int = int('1' + '0' * (SEED_SIZE - 1), 2)
+    maxValue: int = int("{0:b}".format(n), 2)
+
     if n > minValue:
         print(f'początkowa liczba: {int(inputValue, 2)}; liczba bitów: {SEED_SIZE}')
         print(f'Przedział liczb: [{minValue}, {maxValue})')

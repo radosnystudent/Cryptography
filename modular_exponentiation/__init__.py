@@ -14,8 +14,8 @@ def powMod(base: int, power: int, modulus: int) -> int:
         base = base * base % modulus
     return result
 
-if __name__ == "__main__":
-    base = int(input("Base:\n> "))
-    power = int(input("Power:\n> "))
-    modulus = int(input("Modulus:\n> "))
-    print(f'{base}^{power} = {powMod(base, power, modulus)}')
+# if __name__ == "__main__":
+#     base = int(input("Base:\n> "))
+#     power = int(input("Power:\n> "))
+#     modulus = int(input("Modulus:\n> "))
+#     print(f'{base}^{power} = {powMod(base, power, modulus)}')
