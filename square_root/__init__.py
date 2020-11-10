@@ -1,3 +1,10 @@
+"""
+Zaimplementuj algorytm, który oblicza pierwiastek kwadratowy w ciele Fp, gdzie
+p ≡ 3 (mod 4) jest liczbą pierwszą. Wykorzystaj twierdzenie Eulera.
+Dane: b ∈ Fp, b jest resztą kwadratową Fp
+Wynik: a ∈ Fp taki, że a^2 = b.
+"""
+
 from cryptography.modular_exponentiation import powMod
 from cryptography.quadratic_residue import quadraticResidue
 

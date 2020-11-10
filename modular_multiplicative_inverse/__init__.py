@@ -1,3 +1,10 @@
+"""
+Zaimplementuj algorytm do obliczania odwrotności w grupie Φ(n).
+Wykorzystaj Rozszerzony Algorytm Euklidesa.
+Dane: n ∈ N, b ∈ Φ(n)
+Wynik: b^−1 ∈ Φ(n)
+"""
+
 def extendedGCD(a: int, b: int) -> tuple:
     if a != 0:
         g, y, x = extendedGCD(b % a, a)

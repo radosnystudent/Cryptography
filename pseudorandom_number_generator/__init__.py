@@ -1,8 +1,14 @@
+"""
+Zaimplementuj algorytm, który generuje losowy element zbioru Zn.
+Dane: k,n ∈ N
+Wynik: k-bitowa liczba b ∈ Zn
+"""
+
 import datetime as dt
 
 # dowolne stałe
-GENERATOR: int = 391
-MODULUS: int = 735651
+GENERATOR: int = 2057
+MODULUS: int = 3167
 
 inputValue = "{0:b}".format(int(input("Twoja liczba:\n> ")))
 N = int(input("Ile liczb chcesz wygenerować?\n> "))
@@ -16,15 +22,15 @@ def L_function(x: int) -> int:
 
 
 def F_function(x: str):
-    # f(x) <- 2^x mod p
-    return bin(pow(GENERATOR, int(x, 2), MODULUS)).replace('0b', '').zfill(SEED_SIZE)
+    # f(x) <- g^x mod p
+    return "{0:b}".format(pow(GENERATOR, int(x, 2), MODULUS))
 
 
 def HFunction(first_half: str, second_half: str) -> str:
 
     # one-way permutation function
     # function H (x, y)
-    #   f(x) <- 2^x mod p
+    #   f(x) <- g^x mod p  where g is a generator
     #   b <- 0
     #   for i <- 0 to |x| do
     #       b <- b XOR (x[i] AND y[i])

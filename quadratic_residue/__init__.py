@@ -1,3 +1,10 @@
+"""
+Niech p będzie liczbą pierwszą. Zaimplementuj test (funkcję), który sprawdza czy element
+zbioru Z∗p jest resztą kwadratową w Z∗p. Wykorzystaj twierdzenie Eulera.
+Dane: a ∈ Z∗p
+Wynik: True jeśli a jest resztą kwadratową, False w przeciwnym wypadku.
+"""
+
 from cryptography.modular_exponentiation import powMod
 
 def quadraticResidue(a, p):
