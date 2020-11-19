@@ -31,7 +31,7 @@ def PRNG(initial_seed: str, n: int) -> str:
 
     # pseudorandom number generator
     # function G(x0)
-    #   t <- aftual time in miliseconds convert to binary number
+    #   t <- aftual time in miliseconds convert to binary number + initial number to the power of iteration of algorithm (starting from 1)
     #   output <- '1' (because we want 1 on first bit and thats because we don't want k-bit numbers to be like: k=5, k-bit number = 00000 )
     #   for i <- 0 to |x0|- 1 do
     #       t <- H(first_half(t), second_half(t))
@@ -41,18 +41,17 @@ def PRNG(initial_seed: str, n: int) -> str:
 
     # because we need k-bit numbers form range [0, n-1], we need to check if generated number is in given range
     # if not, generate another
-    iteration = 0
+    iteration = 1
     while True:
         result: str = '1'
-        binary_string: str = "{0:b}".format(int(dt.datetime.now().timestamp() * 100000000) + iteration)
-        # print(f'{int(dt.datetime.now().timestamp() * 10000)} : {binary_string}')
+        binary_string: str = "{0:b}".format(int(dt.datetime.now().timestamp() * 100000000) + int(initial_seed, 2)**iteration)
+
         for _ in range(len(initial_seed) - 1):
 
             first_half: str = binary_string[:int(len(binary_string) / 2)]
             second_half: str = binary_string[int(len(binary_string) / 2):]
 
             binary_string = HFunction(first_half, second_half)
-            # print(binary_string)
             result += binary_string[-1]
 
             binary_string = binary_string[:-1]
@@ -73,11 +72,6 @@ def main():
     minValue: int = int('1' + '0' * (SEED_SIZE - 1), 2)
     maxValue: int = int("{0:b}".format(n), 2) - 1 if int("{0:b}".format(n), 2) <= int('1' * (SEED_SIZE), 2) else int('1' * (SEED_SIZE), 2)
 
-    # temp1 = int("{0:b}".format(n), 2)
-    # temp2 = int('1' * (SEED_SIZE), 2)
-
-    # print(f'{temp1} vs {temp2} : {temp1 <= temp2}')
-
     if n > minValue:
         print(f'początkowa liczba: {int(inputValue, 2)}; liczba bitów: {SEED_SIZE}')
         print(f'Przedział liczb: [{minValue}, {maxValue}]')
@@ -86,8 +80,8 @@ def main():
         for _ in range(N):
             inputValue = PRNG(inputValue, n)
             results.append(int(inputValue, 2))
-        print(f'results: {results}')
-        # results.sort()
+        print(f'results: {", ".join([str(x) for x in results])}')
+
         plt.bar(*zip(*Counter(results).items()))
         plt.show()
     else:
