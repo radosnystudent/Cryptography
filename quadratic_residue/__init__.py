@@ -5,19 +5,8 @@ Dane: a ∈ Z∗p
 Wynik: True jeśli a jest resztą kwadratową, False w przeciwnym wypadku.
 """
 
-from modular_exponentiation import powMod, binPowMod
-from binary_arithmetic import divBin, intToBin
+from modular_exponentiation import binPowMod
+from binary_arithmetic import intToBin
 
-def binQuadraticResidue(a: str, p: str):
-    if int(p, 2) < 2:
-        return "p must be 2 or higher"
-    else:
-        return int(binPowMod(a, divBin(intToBin(int(p, 2) - 1), intToBin(2))[0], p), 2) == 1
-
-#################################################################################
-
-def quadraticResidue(a, p):
-    if p < 2:
-        return "p must be 2 or higher"
-    else:
-        return powMod(a, (p - 1) / 2, p) == 1
+def binQuadraticResidue(b: str, p: str) -> str:
+    return b in [binPowMod(intToBin(a), '10', p) for a in range(int(p, 2))]

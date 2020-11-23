@@ -17,8 +17,8 @@ def binPowMod(base: str, power: str, modulus: str) -> str:
 
     return result
 
-#################################################################################
 
+# ta sama funkcja dzialajaca na typie int, ktora wykorzystuje w generowaniu liczb pseudolosowych
 def powMod(base: int, power: int, modulus: int) -> int:
     result: int = 1
     while power:

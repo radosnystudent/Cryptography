@@ -5,22 +5,21 @@ Dane: n ∈ N
 Wynik: True jeśli n jest liczbą pierwszą, False w przeciwnym wypadku.
 """
 
-import random as rnd
-from modular_exponentiation import powMod, binPowMod
-from pseudorandom_number_generator import PRNG
-from binary_arithmetic import intToBin
+from modular_exponentiation import binPowMod
+from binary_arithmetic import intToBin, divBin
+from random import randint
 
-def binFermatTest(n: str):
-    n = int(n, 2)
-    base = PRNG("{0:b}".format(n - 3), n - 2)
-    if binPowMod(base, intToBin(n - 1), intToBin(n)) == 1:
-        return False
-    return True
+def binNwd(a, b):
+    while int(b, 2) != 0:
+        a, b = b, divBin(a, b)[1]
+    return a
 
-#################################################################################
+def binFermatTest(n: str, k: str):
+    n_int: int = int(n, 2)  # zamieniam sobie te liczby na inty, zeby móc łatwo odejmowac potem
+    k_int: int = int(k, 2)  # lub wykorzystywac w petli
 
-def fermatTest(n: int):
-    base = int(PRNG("{0:b}".format(n - 3), n - 2), 2)
-    if powMod(base, n - 1, n) == 1:
-        return False
-    return True
+    for i in range(k_int):
+        b = intToBin(randint(2, n_int - 2))
+        if int(binPowMod(b, intToBin(n_int - 1), n), 2) != 1:
+            return 'nie'
+    return 'tak'

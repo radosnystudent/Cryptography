@@ -1,5 +1,5 @@
 def intToBin(x: int) -> str:
-    return "{0:b}".format(x)
+    return "{0:b}".format(int(x))
 
 
 def removeLeadingZeros(x: str) -> str:
@@ -10,6 +10,11 @@ def removeLeadingZeros(x: str) -> str:
 
 
 def addBin(first: str, second: str) -> str:
+    if int(first, 2) == 0:
+        return second
+    elif int(second, 2) == 0:
+        return first
+
     first = removeLeadingZeros(first)
     second = removeLeadingZeros(second)
     binLength = max(len(first), len(second))
@@ -25,8 +30,8 @@ def addBin(first: str, second: str) -> str:
         temp += 1 if first[i] == '1' else 0
         temp += 1 if second[i] == '1' else 0
 
-        output = ('1' if temp % 2 == 1 else '0') + output  # temp = {0,1,2,3}, if temp = 1 or 3, result bit = 1 else carryover = 1
-        carryover = 0 if temp < 2 else 1  # if carryover = 3, we have to carry 1
+        output = ('1' if temp % 2 == 1 else '0') + output
+        carryover = 0 if temp < 2 else 1
 
     if carryover != 0:
         output = '1' + output
@@ -35,15 +40,20 @@ def addBin(first: str, second: str) -> str:
 
 
 def multBin(first: str, second: str) -> str:
-    if int(first, 2) == 0 or int(second, 2) == 0:
-        return '0'
     first = removeLeadingZeros(first)
     second = removeLeadingZeros(second)
+
+    if first == '' or second == '':
+        return f'wrong input; first number: {first}, second: {second}'
 
     maxLen: int = len(first) + len(second) - 1
     arr: list = list()
     zerosNum = 0
 
+    if first == '0' or second == '0':
+        return '0'
+
+    # mnozymy kolejno pierwsza liczbe przez kolejne bity drugiej
     for i in range(len(second) - 1, -1, -1):
         bitLine: str = ''
         for j in range(len(first) - 1, -1, -1):
@@ -51,6 +61,8 @@ def multBin(first: str, second: str) -> str:
         if '1' in bitLine:
             arr.append((bitLine + '0' * zerosNum).zfill(maxLen))
         zerosNum += 1
+
+    # sumujemy wszystkie powstale liczby
     if len(arr) == 1:
         return arr[0]
     elif len(arr) == 2:
@@ -63,31 +75,39 @@ def multBin(first: str, second: str) -> str:
 
 
 def divBin(first: str, second: str) -> str:
-    first = removeLeadingZeros(first)
-    second = removeLeadingZeros(second)
-    dividend = [first[i] for i in range(len(first) - 1, -1, -1)]
+    first: str = removeLeadingZeros(first)
+    second: str = removeLeadingZeros(second)
+
+    if first == '' or second == '':
+        return f'wrogn input; first number: {first}, second: {second}'
+
+    dividend: list = [first[i] for i in range(len(first) - 1, -1, -1)]
 
     output: str = ''
-    actual: str = '0'
+    actual: str = ''
     pos: int = 0
     k: int = 0
 
     if int(second, 2) > int(first, 2):
         return '0', first
+    if first == '0':
+        return '0', '0'
 
-    while int(second, 2) > int(actual, 2):
-        if k == 0:
-            actual = ''
-            k += 1
+    # wybieramy pierwsza liczbe do odejmowania
+    while True:
         actual += dividend.pop()
+        if int(second, 2) <= int(actual, 2):
+            break
 
+    # jesli dzielnik jest dlugosci dzielnej to miesci sie raz + reszta
     if len(first) == len(actual):
         output += '1'
         actual = "{0:b}".format(int(first, 2) - int(second, 2))
         return output, actual
-    while len(actual) < len(first):
-        if not dividend:
-            break
+
+    # w przeciwnym przypadku wybieramy kolejne liczby, ktore bedzie mozna odjac od dzielnika
+    # aż zużyjemy wszystkie cyfry z dzielnej
+    while dividend:
         if int(second, 2) <= int(actual, 2):
             output += '1'
             actual = "{0:b}".format(int(actual, 2) - int(second, 2))
@@ -98,8 +118,15 @@ def divBin(first: str, second: str) -> str:
             if dividend:
                 actual += dividend.pop()
 
+    # jesli zuzylismy wszystkie bity z dzielnej i aktualna liczba do odjecia jest wieksza/równa od dzielnika
+    # to wykonujemy ostatnie odejmowanie
+    if int(second, 2) <= int(actual, 2):
+        output += '1'
+        actual = "{0:b}".format(int(actual, 2) - int(second, 2))
+    else:
+        if '1' in actual:
+            output += '0'
     return output.zfill(len(first)), actual
-
 
 def menu(a: str, b: str, operation: str) -> str:
     if operation == 'add':
