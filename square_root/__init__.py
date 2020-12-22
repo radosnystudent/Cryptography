@@ -9,4 +9,4 @@ from modular_exponentiation import binPowMod
 from binary_arithmetic import intToBin
 
 def binSquareRoot(b: str, p: str):
-    return binPowMod(p, intToBin((int(p, 2) + 1) // 4), b)
+    return binPowMod(b, intToBin((int(p, 2) - 1) // 2), p) == 1
