@@ -5,8 +5,11 @@ Dane: b ∈ Fp, b jest resztą kwadratową Fp
 Wynik: a ∈ Fp taki, że a^2 = b.
 """
 
-from modular_exponentiation import binPowMod
-from binary_arithmetic import intToBin
+from module1.modular_exponentiation import binPowMod, powMod
+from module1.binary_arithmetic import intToBin
 
 def binSquareRoot(b: str, p: str):
     return binPowMod(b, intToBin((int(p, 2) - 1) // 2), p) == 1
+
+def squareRoot(b, p):
+    return powMod(b, (p - 1) // 2, p) == 1

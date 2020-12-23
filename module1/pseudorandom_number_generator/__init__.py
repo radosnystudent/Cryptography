@@ -6,7 +6,7 @@ Wynik: k-bitowa liczba b ∈ Zn
 from matplotlib import pyplot as plt
 import datetime as dt
 from collections import Counter
-from modular_exponentiation import powMod
+from module1.modular_exponentiation import powMod
 
 GENERATOR: int = 23
 MODULUS: int = 36389

@@ -5,8 +5,8 @@ Dane: a ∈ Z∗p
 Wynik: True jeśli a jest resztą kwadratową, False w przeciwnym wypadku.
 """
 
-from modular_exponentiation import binPowMod
-from binary_arithmetic import intToBin
+from module1.modular_exponentiation import binPowMod
+from module1.binary_arithmetic import intToBin
 
 def binQuadraticResidue(b: str, p: str) -> str:
     return b in [binPowMod(intToBin(a), '10', p) for a in range(int(p, 2))]

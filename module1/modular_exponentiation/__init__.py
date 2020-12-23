@@ -4,7 +4,7 @@ Wykorzystaj algorytm iterowanego podnoszenia do kwadratu.
 Dane: n, k ∈ N, b ∈ Zn
 Wynik: b^k
 """
-from binary_arithmetic import divBin, intToBin, multBin, addBin
+from module1.binary_arithmetic import divBin, intToBin, multBin, addBin
 
 
 def binPowMod(base: str, power: str, modulus: str) -> str:

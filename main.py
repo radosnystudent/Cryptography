@@ -1,15 +1,22 @@
-from fermat_test import binFermatTest
-from quadratic_residue import binQuadraticResidue
-from modular_multiplicative_inverse import binModInvert
-from modular_exponentiation import binPowMod
-from square_root import binSquareRoot
-from pseudorandom_number_generator import main
-from binary_arithmetic import menu
+from module1.fermat_test import binFermatTest
+from module1.quadratic_residue import binQuadraticResidue
+from module1.modular_multiplicative_inverse import binModInvert
+from module1.modular_exponentiation import binPowMod
+from module1.square_root import binSquareRoot
+from module1.pseudorandom_number_generator import main
+from module1.binary_arithmetic import menu
+
+from module1.prng import generatePrimeNumber
+from module2.random_elliptical_curve import elliptical
+from module2.elliptical_curve_point import randomPoint
+from module2.check_curve_point import checkPoint
+from module2.opposite_point import opposite
+from module2.sum_points import sumPoints
 
 def convertListToString(x: list) -> str:
     return "".join([str(e) for e in x])
 
-def start():
+def module1():
     choice: int = int(input("0. Binary arithmetic\n1. Pseudorandom number generator\n2. Modular inverse\n3. Modular exponentiation\n4. Quadratic residue\n5. Square roots\n6. Fermat test\n> "))
     if choice == 0:
         a: str = input("Enter first number (binary): ")
@@ -39,3 +46,27 @@ def start():
         print(f'{binFermatTest(int(input("Enter the number to check if its prime number (binary): ")))}')
     else:
         print("Wrong input!")
+
+
+def module2():
+    choice: int = int(input("1. Random elliptical curve\n2. Find random point\n3. Check if point belongs to the curve\n4. Opposite point\n5. Add two points\n> "))
+    k = 300
+    A = 494959415971850257699585114547619761767844026066388911234738789463512822241993964720487368
+    B = 239614427021073265587611886177902927263167863041565491257781227550405368115731464059190159
+    p = 1183779584357076950937981497685946292711107412152534481102525547387604378262522402526266939
+    x1 = 598700530906084162596261101440667782569915319623798143751082061599951188013331503150304328
+    y1 = 285113634279465403319996581740169338329454608669814309137990174814243655992779447106132850
+    x2 = 754012226560385584185626944584346024956384811926095347825887912144866442212994436980092021
+    y2 = 402200101831194929544543876137349336349711339762053350086857107410309555983396073023465445
+    if choice == 1:
+        print(elliptical(k))
+    elif choice == 2:
+        print(randomPoint(A, B, p))
+    elif choice == 3:
+        print(checkPoint(A, B, p, x1, y1))
+    elif choice == 4:
+        print(opposite(x1, y1))
+    elif choice == 5:
+        print(sumPoints(A, B, p, x1, y1, x2, y2))
+
+module2()
