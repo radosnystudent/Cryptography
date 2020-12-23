@@ -58,15 +58,18 @@ def module2():
     y1 = 285113634279465403319996581740169338329454608669814309137990174814243655992779447106132850
     x2 = 754012226560385584185626944584346024956384811926095347825887912144866442212994436980092021
     y2 = 402200101831194929544543876137349336349711339762053350086857107410309555983396073023465445
-    if choice == 1:
-        print(elliptical(k))
-    elif choice == 2:
-        print(randomPoint(A, B, p))
-    elif choice == 3:
-        print(checkPoint(A, B, p, x1, y1))
-    elif choice == 4:
-        print(opposite(x1, y1))
-    elif choice == 5:
-        print(sumPoints(A, B, p, x1, y1, x2, y2))
+    try:
+        if choice == 1:
+            print(elliptical(k))
+        elif choice == 2:
+            print(randomPoint(A, B, p))
+        elif choice == 3:
+            print(checkPoint(A, B, p, x1, y1))
+        elif choice == 4:
+            print(opposite(x1, y1))
+        elif choice == 5:
+            print(sumPoints(A, B, p, x1, y1, x2, y2))
+    except Exception as e:
+        print(e)
 
 module2()

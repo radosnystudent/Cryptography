@@ -11,7 +11,7 @@ def randomPoint(A, B, p):
 
     while True:
         x = generateNumber(0, p - 1)
-        y = fx(A, B, p, x)  # (powMod(x, 3, p) + A * x + B) % p
+        y = fx(A, B, p, x)
         if squareRoot(y, p):
             y = calculate_square_root(y, p)
             return (x, y)

@@ -11,7 +11,7 @@ def generateNumber(k, n):
     _min = 0
     _max = 0
     if k < 1 and n < 1:
-        pass
+        raise Exception(f'Numbers \'{n=}\' and \'{k=}\' must be >= 1')
     if k == 1:
         _max = 1
     else:
@@ -21,6 +21,7 @@ def generateNumber(k, n):
 
     if _max > _min:
         return randint(_min, _max)
+    raise Exception(f'min > max ! Wrong range - [{_min}, {_max}]')
 
 def checkPrimary(n):
     if n == 1:
@@ -32,7 +33,7 @@ def checkPrimary(n):
     counter = 30
 
     while counter:
-        b = int(generateNumber(2, n - 2))
+        b = generateNumber(2, n - 2)
         if powMod(b, n - 1, n) != 1:
             return False
         counter -= 1
