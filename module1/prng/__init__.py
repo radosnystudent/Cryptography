@@ -30,7 +30,7 @@ def checkPrimary(n):
         return True
 
     number = int(n)
-    counter = 30
+    counter = 20
 
     while counter:
         b = generateNumber(2, n - 2)
@@ -42,5 +42,7 @@ def checkPrimary(n):
 def generatePrimeNumber(k):
     while True:
         n = generateNumber(k, 0)
+        # n = randint(1, k)
+        # print(f'{n=}')
         if checkPrimary(n) and n % 4 == 3:
             return n

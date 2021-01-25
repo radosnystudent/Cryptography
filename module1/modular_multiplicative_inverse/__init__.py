@@ -22,15 +22,35 @@ def binModInvert(a: str, b: str) -> str:
     else:
         return ''
 
-def extendedGCD(a, b):
-    if a != 0:
-        g, y, x = extendedGCD(b % a, a)
-        return (g, x - y * b // a, y)
-    else:
-        return (b, 0, 1)
+def extendedGCD(a, n):
+    #
+    # zmiana algorytmu na wersje iteracyjna,
+    # bo przy duzych liczba dla rekurencji python rzucał błędami
+    #
+
+    A = n
+    B = a
+    U = 0
+    V = 1
+
+    while B != 0:
+        q = A // B
+        x1 = B
+        x2 = A - q * B
+        A = x1
+        B = x2
+        x1 = V
+        x2 = U - q * V
+        U = x1
+        V = x2
+
+    d = A
+    u = U
+    v = (d - a * u) // n
+    return u, v, d
 
 def modInvert(a, b):
     g, x, y = extendedGCD(a, b)
-    if g == 1:
-        return x // b
-    return None
+    if g < 0:
+        g += b
+    return g
