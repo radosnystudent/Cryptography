@@ -41,4 +41,4 @@ def testElG():
     k = 300
     A, B, p, P, Q, x = ElGamal(k)
     print(f'Klucz publiczny to: {[A, B, p, Q, P]}')
-    print(f'Klucz publiczny to: {[A, B, p, Q, P, x]}')
+    print(f'Klucz prywatny to: {[A, B, p, Q, P, x]}')

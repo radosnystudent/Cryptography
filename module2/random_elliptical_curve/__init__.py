@@ -3,7 +3,7 @@ from module1.modular_exponentiation import powMod
 from module1.fermat_test import fermatTest
 
 def fx(A, B, p, x):
-    return (powMod(x, 3, p) + (A * x) % p + B) % p
+    return (powMod(x, 3, p) + (A * x) + B) % p
 
 def elliptical(k):
     if not(fermatTest(k, 100) and k % 4 == 3):

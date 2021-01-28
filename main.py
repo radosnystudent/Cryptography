@@ -1,6 +1,6 @@
 from module1.fermat_test import binFermatTest
 from module1.quadratic_residue import binQuadraticResidue
-from module1.modular_multiplicative_inverse import binModInvert
+from module1.modular_multiplicative_inverse import binModInvert, modInvert
 from module1.modular_exponentiation import binPowMod
 from module1.square_root import binSquareRoot
 from module1.pseudorandom_number_generator import main
@@ -12,6 +12,13 @@ from module2.elliptical_curve_point import randomPoint
 from module2.check_curve_point import checkPoint
 from module2.opposite_point import opposite
 from module2.sum_points import sumPoints
+
+from module3.codingMessage import encode, decode, testCoding
+from module3.ElGamal_keys import ElGamal, testElG
+from module3.multiple_point import multPoint, testMult
+from module3.ElGamalEncoding import encodeElG, testElEnc
+from module3.ElGamalDecoding import decodeElG, testElDec
+
 
 def convertListToString(x: list) -> str:
     return "".join([str(e) for e in x])
@@ -50,6 +57,7 @@ def module1():
 
 def module2():
     choice: int = int(input("1. Random elliptical curve\n2. Find random point\n3. Check if point belongs to the curve\n4. Opposite point\n5. Add two points\n> "))
+    # przykładowe dane
     k = 300
     A = 494959415971850257699585114547619761767844026066388911234738789463512822241993964720487368
     B = 239614427021073265587611886177902927263167863041565491257781227550405368115731464059190159
@@ -72,4 +80,11 @@ def module2():
     except Exception as e:
         print(e)
 
-module2()
+
+def module3():
+    testMult()
+    testElG()
+    testCoding()
+    testElEnc()
+    testElDec()
+module3()
