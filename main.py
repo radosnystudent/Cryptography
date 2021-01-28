@@ -83,8 +83,15 @@ def module2():
 
 def module3():
     testMult()
+    print()
     testElG()
+    print()
     testCoding()
+    print()
     testElEnc()
+    print()
     testElDec()
+
 module3()
+
+# print(multPoint(594, 434, 887, 507, 524, 772))
