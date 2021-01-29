@@ -22,13 +22,17 @@ def hexToBin(hex_number):
     return hexa[hex_number[0]] + hexa[hex_number[1]]
 
 def binToHex(bin_number):
-    first = bin_number[0:4]
-    second = bin_number[4:]
-    result = ''
+    first, second, result = bin_number[0:4], bin_number[4:], ''
+    if len(first) != 4:
+        first = first.zfill(4)
+    if len(second) != 4:
+        second = second.zfill(4)
+
     for key, value in hexa.items():
         if first == value:
             result += key
     for key, value in hexa.items():
         if second == value:
             result += key
+
     return result
