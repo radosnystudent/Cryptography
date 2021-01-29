@@ -19,6 +19,8 @@ from module3.multiple_point import multPoint, testMult
 from module3.ElGamalEncoding import encodeElG, testElEnc
 from module3.ElGamalDecoding import decodeElG, testElDec
 
+from module4.sum import sumHex
+from module4.xtime import xtime
 
 def convertListToString(x: list) -> str:
     return "".join([str(e) for e in x])
@@ -92,6 +94,19 @@ def module3():
     print()
     testElDec()
 
-module3()
-
+# module3()
+# print(sumHex('3F', 'F2'))
+print(f'73 -> {xtime("73")}')
+print()
+print(f'92 -> {xtime("92")}')
+print()
+print(f'32 -> {xtime("32")}')
+print()
+print(f'DC -> {xtime("DC")}')
+print()
+print(f'C6 -> {xtime("C6")}')
+print()
+print(f'CC -> {xtime("CC")}')
+print()
+print(f'2F -> {xtime("2F")}')
 # print(multPoint(594, 434, 887, 507, 524, 772))
