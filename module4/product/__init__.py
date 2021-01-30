@@ -3,7 +3,7 @@ from module4.xtime import xtime
 from module4.sum import sumHex
 
 def product(a, b):
-    first, second, result = hexToBin(a), hexToBin(b), '00'
+    first, second, result = hexToBin(a), hexToBin(b), '0000'
 
     length = len(first) - 1
 

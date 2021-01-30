@@ -22,6 +22,7 @@ from module3.ElGamalDecoding import decodeElG, testElDec
 from module4.sum import sumHex
 from module4.xtime import xtime
 from module4.product import product
+from module4.inverse import inverse
 
 def convertListToString(x: list) -> str:
     return "".join([str(e) for e in x])
@@ -95,20 +96,22 @@ def module3():
     print()
     testElDec()
 
-# module3()
-# print(sumHex('3F', 'F2'))
-# print(f'73 -> {xtime("73")}')
-# print()
-# print(f'92 -> {xtime("92")}')
-# print()
-# print(f'32 -> {xtime("32")}')
-# print()
-# print(f'DC -> {xtime("DC")}')
-# print()
-# print(f'C6 -> {xtime("C6")}')
-# print()
-# print(f'CC -> {xtime("CC")}')
-# print()
-# print(f'2F -> {xtime("2F")}')
 
-print(product("DF", "88"))
+def module4():
+    print(sumHex('3F', 'F2'))
+    print(sumHex('45', '9B'))
+    print(sumHex('EA', '6F'))
+    print()
+
+    print(f'73 -> {xtime("73")}')
+    print(f'92 -> {xtime("92")}')
+    print(f'32 -> {xtime("32")}')
+    print(f'2F -> {xtime("2F")}')
+    print()
+
+    print(product("DF", "88"))
+    print(product("AF", "96"))
+    print(product("82", "92"))
+    print()
+
+module4()
