@@ -103,15 +103,21 @@ def module4():
     print(sumHex('EA', '6F'))
     print()
 
-    print(f'73 -> {xtime("73")}')
-    print(f'92 -> {xtime("92")}')
-    print(f'32 -> {xtime("32")}')
-    print(f'2F -> {xtime("2F")}')
+    print(f'{xtime("73")}')
+    print(f'{xtime("92")}')
+    print(f'{xtime("32")}')
+    print(f'{xtime("2F")}')
     print()
 
     print(product("DF", "88"))
     print(product("AF", "96"))
     print(product("82", "92"))
+    print(product("74", "94"))
     print()
+
+    print(inverse('29'))
+    print(inverse('0B'))
+    print(inverse('E3'))
+    print(inverse('ED'))
 
 module4()
